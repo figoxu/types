@@ -9,7 +9,7 @@ import (
 type Sec int64
 
 func NewSec(ts ...time.Time) Sec {
-	t := time.Now()
+	t := time.Now().In(GetZone())
 	if len(ts) > 0 {
 		t = ts[0]
 	}
@@ -26,7 +26,7 @@ func (p Sec) Val() int64 {
 
 func (p Sec) Tick() Tick {
 	layout := `20060102150405`
-	t, err := time.ParseInLocation(layout, fmt.Sprint(p), time.Local)
+	t, err := time.ParseInLocation(layout, fmt.Sprint(p), GetZone())
 	Chk(err)
 	return NewTick(t)
 }

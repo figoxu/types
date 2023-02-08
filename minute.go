@@ -10,7 +10,7 @@ type Minute int64
 
 // 分钟 200601021504
 func NewMinute(ts ...time.Time) Minute {
-	t := time.Now()
+	t := time.Now().In(GetZone())
 	if len(ts) > 0 {
 		t = ts[0]
 	}
@@ -39,7 +39,7 @@ func (p Minute) Tick() Tick {
 	if p == 0 || len(fmt.Sprint(p)) < len(layout) {
 		return 0
 	}
-	t, err := time.ParseInLocation(layout, fmt.Sprint(p), time.Local)
+	t, err := time.ParseInLocation(layout, fmt.Sprint(p), GetZone())
 	Chk(err)
 	return NewTick(t)
 }
