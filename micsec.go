@@ -7,7 +7,7 @@ type MicSec int64
 // 微妙 10e-6秒 : 介于纳秒和毫秒之间
 func NewMicSec(t ...time.Time) MicSec {
 	if len(t) == 0 {
-		return MicSec(time.Now().UnixNano() / 1e3)
+		return MicSec(time.Now().In(GetZone()).UnixNano() / 1e3)
 	}
 	return MicSec(t[0].UnixNano() / 1e3)
 }

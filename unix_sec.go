@@ -8,7 +8,7 @@ import (
 type UnixSec int64
 
 func NewUnixSec(ts ...time.Time) UnixSec {
-	t := time.Now()
+	t := time.Now().In(GetZone())
 	if len(ts) > 0 {
 		t = ts[0]
 	}
